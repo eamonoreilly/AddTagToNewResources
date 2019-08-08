@@ -5,7 +5,7 @@ $ErrorActionPreference = 'stop'
 $eventGridEvent.data | Out-String -Width 300 | Write-Host
 
 $ChannelURL = $Env:TeamsWebhook
-if (-not $ChannelURL)
+if (-not $ChannelURL -or $ChannelURL -eq "NotUsed")
 {
     Write-Warning ("You need to add the Teams webhook url to the function environment app setting (TeamsWebhook) as it is empty.")
 }
