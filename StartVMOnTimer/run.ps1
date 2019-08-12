@@ -61,9 +61,16 @@ try
         }
         # Update start time if it newer than current time (Sample using https://github.com/eamonoreilly/VMStartedDurable)
         $VMStartTime = GetStartTime -VMId $VirtualMachine.Id
+        Write-Output $VMStartTime
         if ((![string]::IsNullOrEmpty($VMStartTime)) -and ($VMStartTime -lt (Get-Date $CostTag.StartTime).Hour))
         {
-            $VirtualMachine.Tags.Cost = '{"AutoShutdownStartup": true, "StartTime": "' + $VMStartTime + 'am", "StopTime": "7pm"}'
+            if ($VMStartTime -gt 12)
+            {
+                $VirtualMachine.Tags.Cost = '{"AutoShutdownStartup": true, "StartTime": "' + $VMStartTime + 'pm", "StopTime": "7pm"}'
+            }
+            else {
+                $VirtualMachine.Tags.Cost = '{"AutoShutdownStartup": true, "StartTime": "' + $VMStartTime + 'am", "StopTime": "7pm"}'
+            }
             Update-AzVM -ResourceGroupName $VirtualMachine.ResourceGroupName -VM $VirtualMachine -Tag $VirtualMachine.Tags | Write-Verbose
         }
     }
