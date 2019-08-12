@@ -16,7 +16,7 @@ if($Data.operationName -match "Microsoft.Compute/virtualMachines/write" -and $Da
 { 
     # Set tags names
     $TagName = "Cost"
-    $TagValue = '{"AutoShutdownStartup":  true,"StartTime": "7pm", "StopTime": "7am"}'
+    $TagValue = '{"AutoShutdownStartup":  true,"StartTime": "7am", "StopTime": "7pm"}'
 
     # Get resource group and vm name
     $Resources = $Data.resourceUri.Split('/')
