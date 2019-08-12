@@ -66,7 +66,7 @@ try
         {
             if ($VMStartTime -gt 12)
             {
-                $VirtualMachine.Tags.Cost = '{"AutoShutdownStartup": true, "StartTime": "' + $VMStartTime + 'pm", "StopTime": "7pm"}'
+                $VirtualMachine.Tags.Cost = '{"AutoShutdownStartup": true, "StartTime": "' + ($VMStartTime -12) + 'pm", "StopTime": "7pm"}'
             }
             else {
                 $VirtualMachine.Tags.Cost = '{"AutoShutdownStartup": true, "StartTime": "' + $VMStartTime + 'am", "StopTime": "7pm"}'
